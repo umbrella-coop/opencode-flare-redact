@@ -69,7 +69,7 @@ echo '{"hook_event_name":"PreToolUse","tool_name":"Write","tool_input":{"content
   | node pkg/claude-code/plugin/scripts/guard-hook.mjs PreToolUse
 
 # Copilot — prompt rewrite
-echo '{"transformedPrompt":"email alice@corp.com","cwd":"."}' \
+echo '{"transformedPrompt":"rewrite this paragraph","cwd":"."}' \
   | node pkg/github-copilot/plugin/scripts/guard-hook.mjs userPromptTransformed
 
 # Cursor — sensitive read deny
