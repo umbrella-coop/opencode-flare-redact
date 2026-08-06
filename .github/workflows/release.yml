@@ -5,10 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
     inputs:
-      publish:
-        description: 'Publish to npm on merge (changesets/action)'
+      otp:
+        description: 'npm one-time password (2FA) for publishing — leave empty unless npm requires it'
         required: false
-        default: 'true'
+        default: ''
 
 concurrency:
   group: release-${{ github.ref }}
@@ -23,15 +23,15 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 11.15.1
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: pnpm
@@ -48,6 +48,13 @@ jobs:
       - name: Check lockstep versions
         run: pnpm check-versions
 
+      - name: Guard against missing npm publish token
+        if: ${{ secrets.NPM_TOKEN == '' }}
+        run: |
+          echo "::error::NPM_TOKEN secret is not configured. Release will be tagged but NOT published to npm."
+          echo "Add the NPM_TOKEN repository secret (scope @umbrella-coop, access: public) and re-run."
+          exit 1
+
       - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
@@ -59,6 +66,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_OTP: ${{ inputs.otp || '' }}
 
       - name: Tag and create GitHub release
         if: steps.changesets.outputs.published == 'true'
