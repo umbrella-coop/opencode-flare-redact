@@ -20,6 +20,13 @@ blocked (or rewritten, where the platform allows) in prompts.
 | `...-cursor` | `pkg/cursor` | Cursor | `preToolUse`, `beforeReadFile`, `beforeSubmitPrompt`, `postToolUse` (MCP) |
 | `...-mcp` | `pkg/mcp` | Any MCP client | on-demand `flare_scan` / `flare_redact` / `flare_is_clean` / `flare_policy` tools |
 
+## Documentation
+
+- [`docs/api.md`](docs/api.md) — guard engine API reference
+- [`docs/configuration.md`](docs/configuration.md) — policy & surface config
+- [`docs/development-testing.md`](docs/development-testing.md) — develop & test the plugins on each assistant
+- [`docs/npm-publishing.md`](docs/npm-publishing.md) — npm secrets & release setup
+
 ## How it works
 
 Each platform exposes the same four "hook" surfaces, with platform-specific JSON
