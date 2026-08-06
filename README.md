@@ -116,7 +116,9 @@ Two paths — automatic (CI) or agent-driven (interactive):
 **CI (automatic)** — the **Release** workflow ([`release.yml`](.github/workflows/release.yml))
 opens a *"chore(release): version packages"* PR from changesets. Merging it publishes
 to npm (needs `NPM_TOKEN`), creates the combined `v<version>` git tag, and creates a
-GitHub release.
+GitHub release. If `NPM_TOKEN` is missing the workflow **fails loudly** instead of
+silently tagging without publishing — add the repo secret (`@umbrella-coop` scope,
+`access: public`) and re-run.
 
 **Interactive (`pnpm cut-release`)** — stops and asks for input at every block.
 Run as an agent (non-TTY), it prints `🛑 BLOCKED` and exits with code `2` at the
@@ -137,6 +139,23 @@ first decision point so the user is consulted before anything is mutated.
 Bump rules: `patch` for fixes, `minor` for features, `major` for breaking changes —
 mirroring the conventional-commit types in `AGENTS.md`.
 
+### npm publishing requirements
+
+The workflow publishes with the `NPM_TOKEN` secret (repo or org level). For
+unattended CI publishing, the npm account behind that token must **not** require a
+one-time password for publishes:
+
+1. npm account 2FA must be set to **"Authorization only"** (not "Authorization and
+   writing") — 2FA stays on for logins, but automation tokens can publish without OTP.
+2. Use an **Automation** access token (or a granular token scoped to `@umbrella-coop`)
+   as the `NPM_TOKEN` value.
+3. If the org secret is scoped to selected repositories, include
+   `opencode-flare-redact`.
+
+If npm still demands an OTP (e.g. a per-package 2FA check), publish interactively
+instead: `pnpm cut-release publish --otp <code>` (or plain `pnpm cut-release publish`
+in a terminal to be prompted).
+
 ### Versioning scripts
 
 | Script | Purpose |
@@ -144,7 +163,7 @@ mirroring the conventional-commit types in `AGENTS.md`.
 | `pnpm changeset` | Create a changeset entry |
 | `pnpm check-versions` | Fail if packages diverge from the lockstep version |
 | `pnpm version-packages` | Apply changesets (bump versions + changelogs) |
-| `pnpm release` | CI publish path: npm publish, or tag if `NPM_TOKEN` is absent |
+| `pnpm release` | CI publish path: npm publish, or fail loudly if `NPM_TOKEN` is absent in CI |
 | `pnpm cut-release` | Interactive release orchestrator (asks at every block) |
 
 ## Security boundaries
