@@ -22,16 +22,18 @@ import { createGuard, loadGuard } from '@umbrella-coop/flare-redact-core';
 const guard = loadGuard(process.cwd());
 
 // Before a tool runs
-const d = guard.toolInput({ tool: 'Write' }, { content: 'password=hunter2' });
+const d = guard.toolInput({ tool: 'Write' }, { content: userProvidedContent });
+// userProvidedContent containing a secret (e.g. a pasted API key, an email)
+// → { decision: 'block', reason: 'flare-redact: blocked — ...' }
 if (d.decision === 'block') throw new Error(d.reason);
 
 // Before tool output reaches the model
-const out = guard.toolOutput({ tool: 'Bash' }, 'token ghp_...');
+const out = guard.toolOutput({ tool: 'Bash' }, toolStdout);
 if (out.decision === 'redact') sendToModel(out.value);
 
 // Prompts
-const p = guard.prompt({}, 'email alice@corp.com');
-// → { decision: 'rewrite', text: 'email a***@***' }
+const p = guard.prompt({}, userPromptText);
+// → { decision: 'rewrite', text: <same text with secrets masked> }
 ```
 
 ## API
