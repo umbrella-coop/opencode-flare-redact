@@ -1,5 +1,5 @@
 {
-  "name": "@umbrella-coop/flare-redact-ai-code-assistant-github-copilot",
+  "name": "@umbrella-coop/flare-redact-github-copilot",
   "version": "0.1.0",
   "type": "module",
   "description": "GitHub Copilot plugin: redact secrets/PII via preToolUse/postToolUse/userPromptTransformed hooks",
@@ -14,7 +14,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@umbrella-coop/flare-redact-ai-code-assistant-core": "workspace:*"
+    "@umbrella-coop/flare-redact-core": "workspace:*"
   },
   "devDependencies": {
     "@github/copilot-sdk": "1.0.8",

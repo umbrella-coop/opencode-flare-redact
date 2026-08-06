@@ -1,6 +1,6 @@
 import { tool } from '@opencode-ai/plugin/tool';
 import type { Plugin } from '@opencode-ai/plugin';
-import { loadGuard } from '@umbrella-coop/flare-redact-ai-code-assistant-core';
+import { loadGuard } from '@umbrella-coop/flare-redact-core';
 
 /**
  * OpenCode plugin. Runs in-process, so the guard is loaded once per session

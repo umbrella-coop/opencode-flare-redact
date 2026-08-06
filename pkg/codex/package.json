@@ -1,5 +1,5 @@
 {
-  "name": "@umbrella-coop/flare-redact-ai-code-assistant-codex",
+  "name": "@umbrella-coop/flare-redact-codex",
   "version": "0.1.0",
   "type": "module",
   "description": "OpenAI Codex CLI plugin: redact secrets/PII via PreToolUse/UserPromptSubmit hooks",
@@ -14,7 +14,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@umbrella-coop/flare-redact-ai-code-assistant-core": "workspace:*"
+    "@umbrella-coop/flare-redact-core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

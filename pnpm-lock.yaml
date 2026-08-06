@@ -20,7 +20,7 @@ importers:
 
   pkg/claude-code:
     dependencies:
-      '@umbrella-coop/flare-redact-ai-code-assistant-core':
+      '@umbrella-coop/flare-redact-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -39,7 +39,7 @@ importers:
 
   pkg/codex:
     dependencies:
-      '@umbrella-coop/flare-redact-ai-code-assistant-core':
+      '@umbrella-coop/flare-redact-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -74,7 +74,7 @@ importers:
 
   pkg/cursor:
     dependencies:
-      '@umbrella-coop/flare-redact-ai-code-assistant-core':
+      '@umbrella-coop/flare-redact-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -93,7 +93,7 @@ importers:
 
   pkg/github-copilot:
     dependencies:
-      '@umbrella-coop/flare-redact-ai-code-assistant-core':
+      '@umbrella-coop/flare-redact-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -118,7 +118,7 @@ importers:
       '@modelcontextprotocol/sdk':
         specifier: 1.30.0
         version: 1.30.0(zod@4.4.3)
-      '@umbrella-coop/flare-redact-ai-code-assistant-core':
+      '@umbrella-coop/flare-redact-core':
         specifier: workspace:*
         version: link:../core
       zod:
@@ -137,7 +137,7 @@ importers:
 
   pkg/opencode:
     dependencies:
-      '@umbrella-coop/flare-redact-ai-code-assistant-core':
+      '@umbrella-coop/flare-redact-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:

@@ -1,5 +1,5 @@
 import { appendFileSync } from 'node:fs';
-import { loadGuard, adaptPrompt, type AuditEvent, type GuardInstance } from '@umbrella-coop/flare-redact-ai-code-assistant-core';
+import { loadGuard, adaptPrompt, type AuditEvent, type GuardInstance } from '@umbrella-coop/flare-redact-core';
 
 export interface HookInput {
   session_id?: string;

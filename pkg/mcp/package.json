@@ -1,5 +1,5 @@
 {
-  "name": "@umbrella-coop/flare-redact-ai-code-assistant-mcp",
+  "name": "@umbrella-coop/flare-redact-mcp",
   "version": "0.1.0",
   "type": "module",
   "description": "MCP server exposing on-demand scan/redact/is-clean/policy tools",
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.30.0",
-    "@umbrella-coop/flare-redact-ai-code-assistant-core": "workspace:*",
+    "@umbrella-coop/flare-redact-core": "workspace:*",
     "zod": "^4.4.3"
   },
   "devDependencies": {

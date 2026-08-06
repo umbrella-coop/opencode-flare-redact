@@ -12,7 +12,7 @@ blocked (or rewritten, where the platform allows) in prompts.
 
 | Package | Directory | Platform | Interception points |
 |---|---|---|---|
-| `@umbrella-coop/flare-redact-ai-code-assistant-core` | `pkg/core` | — | Guard engine (no platform imports) |
+| `@umbrella-coop/flare-redact-core` | `pkg/core` | — | Guard engine (no platform imports) |
 | `...-opencode` | `pkg/opencode` | OpenCode | `tool.execute.before/after`, `experimental.chat.messages.transform`, `.system.transform` |
 | `...-claude-code` | `pkg/claude-code` | Claude Code | `PreToolUse`, `PostToolUse`, `UserPromptSubmit` |
 | `...-github-copilot` | `pkg/github-copilot` | GitHub Copilot | `preToolUse`, `postToolUse`, `userPromptTransformed` |
@@ -76,12 +76,12 @@ when set. See [`docs/configuration.md`](docs/configuration.md).
 
 Per-assistant instructions live in each package's README:
 
-- **OpenCode** — `npm i -D @umbrella-coop/flare-redact-ai-code-assistant-opencode`, then add it to `plugin` in `opencode.json`.
+- **OpenCode** — `npm i -D @umbrella-coop/flare-redact-opencode`, then add it to `plugin` in `opencode.json`.
 - **Claude Code** — marketplace install: `/plugin marketplace add <owner>/<repo>`, then `/plugin install flare-redact@...`. Or `claude plugin install ./pkg/claude-code/plugin`.
 - **GitHub Copilot** — `copilot plugin install ./pkg/github-copilot/plugin` (or via marketplace).
 - **Codex CLI** — copy the `[hooks]` block from `pkg/codex/plugin/config.example.toml` into `.codex/config.toml`.
 - **Cursor** — `~/.cursor/plugins/local/<link>` pointing at `pkg/cursor/plugin`, or copy `.cursor-plugin/` into the repo.
-- **MCP** — `npx @umbrella-coop/flare-redact-ai-code-assistant-mcp` as a stdio server (`FLARE_REDACT_PROJECT_DIR` selects the project).
+- **MCP** — `npx @umbrella-coop/flare-redact-mcp` as a stdio server (`FLARE_REDACT_PROJECT_DIR` selects the project).
 
 ## Development
 

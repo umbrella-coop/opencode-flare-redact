@@ -1,6 +1,6 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
-import { loadGuard, type GuardInstance } from '@umbrella-coop/flare-redact-ai-code-assistant-core';
+import { loadGuard, type GuardInstance } from '@umbrella-coop/flare-redact-core';
 
 const SURFACE_NAMES = ['tool.input', 'tool.output', 'prompt', 'write', 'sensitiveRead'] as const;
 

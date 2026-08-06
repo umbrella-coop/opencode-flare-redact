@@ -4,13 +4,13 @@
   "commit": false,
   "fixed": [
     [
-      "@umbrella-coop/flare-redact-ai-code-assistant-core",
-      "@umbrella-coop/flare-redact-ai-code-assistant-opencode",
-      "@umbrella-coop/flare-redact-ai-code-assistant-claude-code",
-      "@umbrella-coop/flare-redact-ai-code-assistant-github-copilot",
-      "@umbrella-coop/flare-redact-ai-code-assistant-codex",
-      "@umbrella-coop/flare-redact-ai-code-assistant-cursor",
-      "@umbrella-coop/flare-redact-ai-code-assistant-mcp"
+      "@umbrella-coop/flare-redact-core",
+      "@umbrella-coop/flare-redact-opencode",
+      "@umbrella-coop/flare-redact-claude-code",
+      "@umbrella-coop/flare-redact-github-copilot",
+      "@umbrella-coop/flare-redact-codex",
+      "@umbrella-coop/flare-redact-cursor",
+      "@umbrella-coop/flare-redact-mcp"
     ]
   ],
   "linked": [],

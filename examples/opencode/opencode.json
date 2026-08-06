@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
-    "@umbrella-coop/flare-redact-ai-code-assistant-opencode"
+    "@umbrella-coop/flare-redact-opencode"
   ]
 }

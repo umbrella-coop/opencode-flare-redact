@@ -1,5 +1,5 @@
 {
-  "name": "@umbrella-coop/flare-redact-ai-code-assistant-opencode",
+  "name": "@umbrella-coop/flare-redact-opencode",
   "version": "0.1.0",
   "type": "module",
   "description": "OpenCode plugin: redact secrets/PII before they reach the model",
@@ -21,7 +21,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@umbrella-coop/flare-redact-ai-code-assistant-core": "workspace:*"
+    "@umbrella-coop/flare-redact-core": "workspace:*"
   },
   "devDependencies": {
     "@opencode-ai/plugin": "1.18.14",

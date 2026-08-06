@@ -4,7 +4,7 @@ import {
   adaptPrompt,
   type AuditEvent,
   type GuardInstance,
-} from '@umbrella-coop/flare-redact-ai-code-assistant-core';
+} from '@umbrella-coop/flare-redact-core';
 
 export interface CodexHookInput {
   tool_name?: string;

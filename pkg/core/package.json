@@ -1,5 +1,5 @@
 {
-  "name": "@umbrella-coop/flare-redact-ai-code-assistant-core",
+  "name": "@umbrella-coop/flare-redact-core",
   "version": "0.1.0",
   "type": "module",
   "description": "Assistant-agnostic secret/PII redaction guard engine built on flare-redact",

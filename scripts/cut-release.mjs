@@ -84,7 +84,7 @@ function writeChangeset(bump, description) {
   const file = join(root, '.changeset', changesetId());
   const body = [
     '---',
-    '"@umbrella-coop/flare-redact-ai-code-assistant-core": ' + bump,
+    '"@umbrella-coop/flare-redact-core": ' + bump,
     '---',
     '',
     description,
@@ -143,7 +143,7 @@ function tag() {
   const tags = [];
   tags.push(`v${v}`);
   for (const name of PACKAGE_DIRS) {
-    tags.push(`@umbrella-coop/flare-redact-ai-code-assistant-${name}@${pkgVersion(name)}`);
+    tags.push(`@umbrella-coop/flare-redact-${name}@${pkgVersion(name)}`);
   }
   for (const t of tags) {
     try {

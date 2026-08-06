@@ -1,5 +1,5 @@
 {
-  "name": "@umbrella-coop/flare-redact-ai-code-assistant-claude-code",
+  "name": "@umbrella-coop/flare-redact-claude-code",
   "version": "0.1.0",
   "type": "module",
   "description": "Claude Code plugin: redact secrets/PII via PreToolUse/PostToolUse/UserPromptSubmit hooks",
@@ -14,7 +14,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@umbrella-coop/flare-redact-ai-code-assistant-core": "workspace:*"
+    "@umbrella-coop/flare-redact-core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
