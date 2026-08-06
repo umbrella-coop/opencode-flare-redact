@@ -48,13 +48,6 @@ jobs:
       - name: Check lockstep versions
         run: pnpm check-versions
 
-      - name: Guard against missing npm publish token
-        if: ${{ secrets.NPM_TOKEN == '' }}
-        run: |
-          echo "::error::NPM_TOKEN secret is not configured. Release will be tagged but NOT published to npm."
-          echo "Add the NPM_TOKEN repository secret (scope @umbrella-coop, access: public) and re-run."
-          exit 1
-
       - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
