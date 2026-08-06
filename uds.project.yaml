@@ -1,0 +1,7 @@
+version: "1"
+
+commands:
+  test: pnpm test
+  lint: pnpm lint
+  build: pnpm build
+  security: pnpm review-security

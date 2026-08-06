@@ -1,0 +1,20 @@
+{
+  "policy": {
+    "mode": "mask",
+    "enable": ["pii", "high_entropy"],
+    "minConfidence": 0.6,
+    "refineConfidence": true,
+    "allow": [],
+    "terms": []
+  },
+  "surfaces": {
+    "tool.output": "redact",
+    "prompt": "redact",
+    "write": "block",
+    "sensitiveRead": "block",
+    "tool.input": "redact"
+  },
+  "audit": {
+    "enabled": true
+  }
+}

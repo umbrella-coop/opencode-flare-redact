@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "command": "node ./scripts/guard-hook.mjs preToolUse",
+        "timeout": 30,
+        "matcher": "Shell|Write|Edit|Read|Grep|Glob|Task|Delete|MCP:.*",
+        "failClosed": true
+      }
+    ],
+    "beforeReadFile": [
+      {
+        "command": "node ./scripts/guard-hook.mjs beforeReadFile",
+        "timeout": 30,
+        "matcher": "Read",
+        "failClosed": true
+      }
+    ],
+    "beforeSubmitPrompt": [
+      {
+        "command": "node ./scripts/guard-hook.mjs beforeSubmitPrompt",
+        "timeout": 30,
+        "matcher": "UserPromptSubmit",
+        "failClosed": true
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": "node ./scripts/guard-hook.mjs postToolUse",
+        "timeout": 30,
+        "matcher": "MCP:.*",
+        "failClosed": true
+      }
+    ]
+  }
+}

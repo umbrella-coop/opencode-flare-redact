@@ -1,0 +1,9 @@
+{
+  "name": "flare-redact",
+  "description": "Redact secrets and PII before they reach the model, and block sensitive file reads.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "umbrella-coop"
+  }
+}

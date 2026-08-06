@@ -1,0 +1,30 @@
+# Sample Codex configuration. Copy the `[hooks]` block into
+# `.codex/config.toml` (project, requires trust) or `~/.codex/config.toml`
+# (user). Paths may use $PLUGIN_ROOT when installed as a Codex plugin, or an
+# absolute path to this package's `plugin/scripts/guard-hook.mjs`.
+
+[features]
+hooks = true
+
+[[hooks.PreToolUse]]
+matcher = "Bash|apply_patch|Edit|Write|Read|Grep|Glob|mcp__.*"
+
+[[hooks.PreToolUse.hooks]]
+type = "command"
+command = 'node "<ABSOLUTE_PATH>/plugin/scripts/guard-hook.mjs" PreToolUse'
+timeout = 30
+
+[[hooks.UserPromptSubmit]]
+
+[[hooks.UserPromptSubmit.hooks]]
+type = "command"
+command = 'node "<ABSOLUTE_PATH>/plugin/scripts/guard-hook.mjs" UserPromptSubmit'
+timeout = 30
+
+[[hooks.PostToolUse]]
+matcher = "Bash|apply_patch|Edit|Write|Read|Grep|Glob|mcp__.*"
+
+[[hooks.PostToolUse.hooks]]
+type = "command"
+command = 'node "<ABSOLUTE_PATH>/plugin/scripts/guard-hook.mjs" PostToolUse'
+timeout = 30

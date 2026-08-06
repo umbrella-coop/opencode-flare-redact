@@ -1,0 +1,16 @@
+{
+  "name": "umbrella-coop-flare-redact",
+  "owner": {
+    "name": "umbrella-coop"
+  },
+  "plugins": [
+    {
+      "name": "flare-redact",
+      "source": "./plugin",
+      "description": "Redact secrets and PII before they reach Claude or leak from tool results.",
+      "version": "0.1.0",
+      "category": "security",
+      "strict": true
+    }
+  ]
+}

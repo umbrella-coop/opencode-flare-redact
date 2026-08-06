@@ -1,0 +1,28 @@
+{
+  "name": "@umbrella-coop/flare-redact-ai-code-assistant-cursor",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Cursor plugin: redact secrets/PII via preToolUse/beforeReadFile/beforeSubmitPrompt hooks",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "plugin"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@umbrella-coop/flare-redact-ai-code-assistant-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.28.1",
+    "typescript": "~5.9.3",
+    "vitest": "^4.1.10"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

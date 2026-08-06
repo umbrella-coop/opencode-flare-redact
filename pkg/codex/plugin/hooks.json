@@ -1,0 +1,37 @@
+{
+  "PreToolUse": [
+    {
+      "matcher": "Bash|apply_patch|Edit|Write|Read|Grep|Glob|WebFetch|WebSearch|mcp__.*|local_shell_exec|update_plan",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node \"$PLUGIN_ROOT/scripts/guard-hook.mjs\" PreToolUse",
+          "timeout": 30
+        }
+      ]
+    }
+  ],
+  "PostToolUse": [
+    {
+      "matcher": "Bash|apply_patch|Edit|Write|Read|Grep|Glob|WebFetch|WebSearch|mcp__.*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node \"$PLUGIN_ROOT/scripts/guard-hook.mjs\" PostToolUse",
+          "timeout": 30
+        }
+      ]
+    }
+  ],
+  "UserPromptSubmit": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node \"$PLUGIN_ROOT/scripts/guard-hook.mjs\" UserPromptSubmit",
+          "timeout": 30
+        }
+      ]
+    }
+  ]
+}

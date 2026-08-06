@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "flare-redact",
+  "displayName": "Flare Redact",
+  "version": "0.1.0",
+  "description": "Redact secrets and PII before they reach Claude or leak from tool results.",
+  "author": {
+    "name": "umbrella-coop"
+  },
+  "license": "MIT",
+  "keywords": ["secret", "pii", "redaction", "security"],
+  "defaultEnabled": false,
+  "hooks": "./hooks/hooks.json"
+}

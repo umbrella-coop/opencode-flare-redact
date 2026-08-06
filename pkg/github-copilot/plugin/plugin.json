@@ -1,0 +1,8 @@
+{
+  "name": "flare-redact",
+  "description": "Redact secrets and PII before they reach the model, and mask them in tool results.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "umbrella-coop",
+  "hooks": "./hooks/hooks.json"
+}

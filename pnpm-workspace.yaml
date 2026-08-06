@@ -1,0 +1,11 @@
+packages:
+  - "pkg/*"
+
+allowBuilds:
+  esbuild: true
+  koffi: false
+  msgpackr-extract: false
+
+minimumReleaseAgeExclude:
+  - '@opencode-ai/plugin@1.18.14'
+  - '@opencode-ai/sdk@1.18.14'

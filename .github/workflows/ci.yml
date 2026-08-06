@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.15.1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck (lint)
+        run: pnpm lint
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test
+        run: pnpm test
+
+      - name: Check lockstep versions
+        run: pnpm check-versions
+
+  validate-plugins:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build (bundles hook scripts)
+        run: pnpm build
+
+      - name: Validate Claude Code plugin manifest
+        run: npx @anthropic-ai/claude-code plugin validate ./pkg/claude-code/plugin --strict
+        continue-on-error: true
+
+      - name: Validate JSON manifests
+        run: |
+          node -e "for (const f of ['pkg/claude-code/plugin/.claude-plugin/plugin.json','pkg/claude-code/plugin/hooks/hooks.json','pkg/claude-code/marketplace.json','pkg/github-copilot/plugin/plugin.json','pkg/github-copilot/plugin/hooks/hooks.json','pkg/github-copilot/marketplace.json','pkg/cursor/plugin/.cursor-plugin/plugin.json','pkg/cursor/plugin/hooks/hooks.json','pkg/cursor/marketplace.json','pkg/codex/plugin/hooks.json']) { JSON.parse(require('fs').readFileSync(f,'utf8')); console.log('ok', f) }"
+
+  self-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Self-scan repository for secrets/PII
+        run: npx --yes --package flare-redact@1.4.1 flare-redact --scan . --exclude package-lock.json --exclude pnpm-lock.yaml --exclude pkg/claude-code/plugin/scripts --exclude pkg/github-copilot/plugin/scripts --exclude pkg/codex/plugin/scripts --exclude pkg/cursor/plugin/scripts

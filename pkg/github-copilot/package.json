@@ -1,0 +1,29 @@
+{
+  "name": "@umbrella-coop/flare-redact-ai-code-assistant-github-copilot",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "GitHub Copilot plugin: redact secrets/PII via preToolUse/postToolUse/userPromptTransformed hooks",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "plugin"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@umbrella-coop/flare-redact-ai-code-assistant-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@github/copilot-sdk": "1.0.8",
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.28.1",
+    "typescript": "~5.9.3",
+    "vitest": "^4.1.10"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

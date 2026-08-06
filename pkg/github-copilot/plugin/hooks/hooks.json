@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "matcher": "bash|edit|write|read|grep|glob|web|mcp",
+        "command": "node \"$PLUGIN_ROOT/scripts/guard-hook.mjs\" preToolUse",
+        "timeoutSec": 30
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "command",
+        "matcher": "bash|edit|write|read|grep|glob|web|mcp",
+        "command": "node \"$PLUGIN_ROOT/scripts/guard-hook.mjs\" postToolUse",
+        "timeoutSec": 30
+      }
+    ],
+    "userPromptTransformed": [
+      {
+        "type": "command",
+        "command": "node \"$PLUGIN_ROOT/scripts/guard-hook.mjs\" userPromptTransformed",
+        "timeoutSec": 30
+      }
+    ]
+  }
+}
