@@ -111,14 +111,18 @@ private workspace root (`@umbrella-coop/flare-redact-ai-code-assistant`) is
 
 ### Cut a release
 
-Two paths — automatic (CI) or agent-driven (interactive):
+Two workflows, cleanly split:
 
-**CI (automatic)** — the **Release** workflow ([`release.yml`](.github/workflows/release.yml))
-opens a *"chore(release): version packages"* PR from changesets. Merging it publishes
-to npm (needs `NPM_TOKEN`), creates the combined `v<version>` git tag, and creates a
-GitHub release. If `NPM_TOKEN` is missing the workflow **fails loudly** instead of
-silently tagging without publishing — add the repo secret (`@umbrella-coop` scope,
-`access: public`) and re-run.
+- **`release.yml`** — *versioning only.* Opens/updates a *"chore(release):
+  version packages"* PR from changesets (`pnpm version-packages`). Merging it
+  automatically triggers the publish workflow.
+- **`publish.yml`** — *publishing.* Publishes to npm (`pnpm release`, needs
+  `NPM_TOKEN`), creates the combined `v<version>` git tag, and creates a GitHub
+  release. Callable from `release.yml`, or manually:
+  `gh workflow run publish.yml [-f otp=<code>]`.
+
+See [`docs/npm-publishing.md`](docs/npm-publishing.md) for how to configure the
+`NPM_TOKEN` secret (granular token with **Bypass 2FA** so CI never needs an OTP).
 
 **Interactive (`pnpm cut-release`)** — stops and asks for input at every block.
 Run as an agent (non-TTY), it prints `🛑 BLOCKED` and exits with code `2` at the
@@ -141,18 +145,19 @@ mirroring the conventional-commit types in `AGENTS.md`.
 
 ### npm publishing requirements
 
-The workflow publishes with the `NPM_TOKEN` secret (repo or org level). For
-unattended CI publishing, the npm account behind that token must **not** require a
-one-time password for publishes:
+The `Publish` workflow uses the `NPM_TOKEN` secret (repo or org level). Per
+[npm docs](https://docs.npmjs.com/about-access-tokens) (granular access tokens only,
+since Nov 2025), the token must be created with **Bypass 2FA enabled** so CI can
+publish without a one-time password:
 
-1. npm account 2FA must be set to **"Authorization only"** (not "Authorization and
-   writing") — 2FA stays on for logins, but automation tokens can publish without OTP.
-2. Use an **Automation** access token (or a granular token scoped to `@umbrella-coop`)
-   as the `NPM_TOKEN` value.
-3. If the org secret is scoped to selected repositories, include
-   `opencode-flare-redact`.
+1. npmjs.com → Access Tokens → **Granular Access Token** → grant **Read and write**
+   on the `@umbrella-coop` scope (via *packages/scopes*, not *organizations*).
+2. Enable **Bypass 2FA** on the token.
+3. Store it as `NPM_TOKEN` (repo or org secret; include this repo if scoped).
 
-If npm still demands an OTP (e.g. a per-package 2FA check), publish interactively
+Full walkthrough: [`docs/npm-publishing.md`](docs/npm-publishing.md).
+
+If npm still demands an OTP (token without Bypass 2FA), publish interactively
 instead: `pnpm cut-release publish --otp <code>` (or plain `pnpm cut-release publish`
 in a terminal to be prompted).
 

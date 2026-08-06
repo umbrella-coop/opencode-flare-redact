@@ -1,0 +1,61 @@
+name: Publish
+
+on:
+  workflow_call:
+    inputs:
+      otp:
+        type: string
+        required: false
+        default: ''
+  workflow_dispatch:
+    inputs:
+      otp:
+        description: 'npm one-time password (2FA) — only needed if NPM_TOKEN does not bypass 2FA'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.15.1
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Publish packages to npm
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_OTP: ${{ inputs.otp || '' }}
+        run: pnpm release
+
+      - name: Tag and create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="$(node -p "require('./pkg/core/package.json').version")"
+          if git rev-parse -q --verify "refs/tags/v${VERSION}" >/dev/null; then
+            echo "tag v${VERSION} already exists — skipping"
+          else
+            git tag "v${VERSION}"
+            git push origin "v${VERSION}"
+            gh release create "v${VERSION}" --title "v${VERSION}" --generate-notes
+            echo "created v${VERSION} tag + release"
+          fi
